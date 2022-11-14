@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table, tr, td {
+                border: 1px solid black;
+            }
+    </style>
+</head>
+<body>
+    <table id = "tab">
+        <tr>
+            <td>Codice Cliente</td>
+            <td><input type="text" name="" id="codCliente"></td>
+        </tr>
+        <tr>
+            <td>Kw/h consumati</td>
+            <td><input type="text" name="" id="kwConsumati" ></td>
+        </tr>
+        <tr>
+            <td>Costo Kw/h</td>
+            <td><input type="text" name="" id="costo" disabled value="0.03"></td>
+        </tr>
+        <tr>
+            <td>Iva</td>
+            <td> <input type="text" name="" id="iva" disabled value="22"></td>
+        </tr>
+        <tr>
+            <td>Canone</td>
+            <td> <input type="text" name="" id="canone" disabled value="20"></td>
+        </tr>
+        <tr>
+            <td><button id="add" onclick="aggiungi()">Aggiungi Utente</button></td>
+            <td><button id="add" onclick="calcola()">Aggiungi utente</button></td>
+        </tr>
+        
+    </table>
+
+    <script>
+        let kw;
+        let pos = 0;
+        function aggiungi(){
+            let u = document.getElementById("codCliente").value;
+            document.createElement("tab");
+
+            
+            riga = document.createElement("tr");
+            document.getElementById("tbody").appendChild(riga);
+            kw = document.getElementById("kwConsumati"); 
+            console.log(utente.pos);
+            
+        }
+    </script>
+</body>
+</html>
