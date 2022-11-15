@@ -4,56 +4,98 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Bolletta V2</title>
     <style>
-        table, tr, td {
-                border: 1px solid black;
-            }
+        table, tbody, tr, td{
+            border: 1px solid black;
+        }
+       
     </style>
 </head>
 <body>
-    <table id = "tab">
+   
+    <table>
         <tr>
-            <td>Codice Cliente</td>
-            <td><input type="text" name="" id="codCliente"></td>
+          <td>Codice Cliente</td>
+          <td><input type="text" id="cliente"></input></td>
         </tr>
         <tr>
-            <td>Kw/h consumati</td>
-            <td><input type="text" name="" id="kwConsumati" ></td>
+          <td>Kw/h consumati</td>
+          <td><input type="text" id="consumo" ></input></td>
         </tr>
         <tr>
-            <td>Costo Kw/h</td>
-            <td><input type="text" name="" id="costo" disabled value="0.03"></td>
+          <td>Costo Kw/h</td>
+          <td id="costo">0.03</td>
         </tr>
         <tr>
-            <td>Iva</td>
-            <td> <input type="text" name="" id="iva" disabled value="22"></td>
-        </tr>
+            <td>IVA</td>
+            <td id="iva">22</td>
+          </tr>
         <tr>
             <td>Canone</td>
-            <td> <input type="text" name="" id="canone" disabled value="20"></td>
+            <td id="canone">20</td>
         </tr>
         <tr>
-            <td><button id="add" onclick="aggiungi()">Aggiungi Utente</button></td>
-            <td><button id="add" onclick="calcola()">Aggiungi utente</button></td>
+            <td><button onclick="aggiungi()"> aggiungi utente</button></td>
+            <td><button onclick="calcola()">Calcola</button></td>
         </tr>
-        
+
+      </table>
+      <br><br>
+      <table>
+        <tbody id="tab">
+          <tr>
+              <td>Codice</td>
+              <td>Consumo * Kw/h</td>
+              <td>Canone</td>
+              <td>IVA</td>
+              <td>Totale</td>
+          </tr>
+      </tbody>
     </table>
+ 
+      <script>
+        //Dichiarazione Variabili
+        var sommaTot = 0;
+        var clienti = [];
+        var consumi = [];
+        var pos = 0;
+        var costokw = parseFloat(document.getElementById("costo").value);
+        var iva = parseFloat(document.getElementById("iva").value);
+        var canone = parseFloat(document.getElementById("canone").value);
 
-    <script>
-        let kw;
-        let pos = 0;
+        //Funzione aggiungi: funzione che aggiunge a due vettori i dati dei clienti
         function aggiungi(){
-            let u = document.getElementById("codCliente").value;
-            document.createElement("tab");
-
+            clienti[pos] = document.getElementById("cliente").value;
+            consumi[pos] = parseInt(document.getElementById("consumo").value);
+            if ((clienti[pos]<0 || isNaN(clienti[pos])) || (consumi[pos]<0 || isNaN(consumi[pos])))
+              alert("Input Errato!");
             
-            riga = document.createElement("tr");
-            document.getElementById("tbody").appendChild(riga);
-            kw = document.getElementById("kwConsumati"); 
-            console.log(utente.pos);
-            
-        }
-    </script>
-</body>
-</html>
+            else{
+              pos++;
+              return alert("Utente aggiunto");
+            }
+            document.getElementById("codice").innerText="";
+            document.getElementById("consumo").innerText="";
+          }
+ 
+          //Funzione calcola: Funzione che calcolerà il costo per ogni utente
+          function calcola(){
+              for(var i = 0; i<clienti.length; i++){
+                let t=document.getElementById("tab");
+                let tbody=t.children[i+1];
+                t = document.createElement("tr");
+                document.getElementById("tab").appendChild(t);
+                totCons=consumi[i]*costokw;
+                totIva=totCons*iva;
+                totale=totCons+canone+iva;
+                sommaTot+=totale;
+                let stringa =`<tr><td>${clienti[i]}</td><td>${consumi[i]}*${costokw}=${totCons.toFixed(2)}</td><td>${canone}</td><td>${totCons}*${iva*100}%=${totIva.toFixed(2)}</td><td>${totale.toFixed(2)}€</td></tr>`;
+                tbody.innerHTML = stringa;
+              }
+              document.getElementById("codice").value="";
+              document.getElementById("consumo").value="";
+          }
+        </script>
+      </body>
+      </html>
