@@ -5,36 +5,46 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        table, tbody, tr, td{
+            border: 1px solid black;
+        }
+       
+    </style>
 </head>
 <body>
-    <table id="tab">
-        <tr>
-            <td>CONT</td>
-            <td>NUM</td>
-            <td>SOMMA PREC</td>
-            <td>MAX SOMMA PREC</td>
-        </tr>
-        <tbody>
-
+    <table>
+        <tbody id="tbody">
+            <tr>
+                <td>Cont</td>
+                <td>NUM</td>
+                <td>SOMMA PREC.</td>
+                <td>MAX SOMMA PREC.</td>
+            </tr>
         </tbody>
     </table>
+
     <script>
+        var v = [];
+        somma = 0;
 
-        var n = [];
-        var somma = 0;
-        do{
-            let nI = Number(prompt("Inserisci n"+(i+1)+": "));
-            n[i] = nI;
-        }while(nI!=0);
-        
-            for(var j = 0; j<i; j++) somma += n[j];
-            if (somma<nI){
-                console.log(n);   
-            riga = document.createElement(<tr><td>i</td><td>n</td><td>somma</td><td>si</td></tr>);
+        for(var i = 0; n!=0; i++){
+            var n = Number(prompt("Inserisci un valore:"));
+            v[i] = n;
+
+            if(i>0){
+                somma += v[i-1];
+                let riga = document.createElement("tr");
+                let td = document.createElement("td");
+                td +=`<tr><td>${i}</td><td>${v[i]}</td><td>${somma}</td></tr>`;
+                if (somma>v[i])
+                    td +=`<td>${"No"}</td></tr>`;
+                else
+                    td +=`<td>${"Si"}</td></tr>`;
+                riga.appendChild(td);
+                document.getElementById('tab').appendChild(riga);
+            }
         }
-
-
-        
     </script>
 </body>
 </html>
